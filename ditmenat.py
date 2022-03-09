@@ -1,18 +1,46 @@
 import numpy as np
 
-
 a  = np.array([
-    [4, 2, 3, 9],
-    [-2, 4, 7, -7],
-    [2, 3, 11, 1],
-    [1, 1, 2, 0]
+    [4, 2, 3, 9, 19],
+    [-2, 4, 7, -7, 2],
+    [2, 3, 11, 1, 3],
+    [1, 1, 2, 0, 2],
+    [1, 1, 2, 2, 3]
 ])
 
-# a = np.array([
-#     [1, 2, 4],
-#     [1, 2, 1],
-#     [1, -.5, 1]
-# ])
+a = np.array([
+    [0, -1, 1],
+    [1, 1, -1],
+    [-1, 0, 2]
+])
+
+a = np.array([
+    [1, 0, 2, -1],
+    [3, -1, 2, 1], 
+    [-2, 1, 4, -1],
+    [-1, -2, 3, 1]
+    ])
+
+a = np.array([
+    [-1, 0, -2, 0],
+    [-3, 2, 1, -3],
+    [1, -2, -1, 3], 
+    [2, 1, 4, -2]
+])
+
+a = np.array([
+    [17, 0, 0, 0],
+    [-83, 20, 0, 0],
+    [25, 100, 500, 0],
+    [-6, -8, -10, 5000]
+])
+
+a = np.array([
+    [1, -2, -1],
+    [2, -4, 2],
+    [3, -5, 1]]
+)
+
 
 def find_byx(arr):
     final = 0
@@ -25,10 +53,9 @@ def find_byx(arr):
                 z[:, nc] = arr[1:arr.shape[0], c]
                 nc += 1
 
-        if z.shape[0] == 2:
-            a = z[0, 0] * z[1, 1]
-            b = z[1, 0] * z[0, 1]
-            q =  a - b
+        if z.shape[0] == 1:
+            q = z[0]
+            pass 
 
         else:
             q = find_byx(z)
@@ -38,5 +65,19 @@ def find_byx(arr):
 
     return final
 
-3d
+def find_codeter(x,y):
+
+    out_vec = np.zeros([1,3])
+
+    for i in range(0,3):
+        out_vec[0, i] = find_byx(np.array(
+            [
+                [x[i-2], y[i-2]],
+                [x[1], y[i-1]]
+                ]
+            ))
+
+    return(out_vec)
+
+print(find_codeter([1,1,0],[0,1,0]))
 print(find_byx(a))
