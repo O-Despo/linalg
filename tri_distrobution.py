@@ -8,7 +8,7 @@ import numpy as np
 import random
 from matplotlib import pyplot as plt
 
-NUM_OF_POINTS = 100
+NUM_OF_POINTS = 1000
 W = 100
 H = 100
 
@@ -24,15 +24,20 @@ def makePoint(H,W,rotate_point):
         
     return p_1
 
+def makePointbad(H,W):
+    x = random.random()*W
+    y = random.random()*(x*(H/-W)+H)
+    return [x,y]
 
-points = np.zeros((NUM_OF_POINTS,2), dtype='int64')
-print(points)
+points_distro = np.zeros((NUM_OF_POINTS,2), dtype='int64')
+points_no_distro = np.zeros((NUM_OF_POINTS,2), dtype='int64')
 
 for i in range(NUM_OF_POINTS):
-    points[i] = makePoint(H, W, rotate_point)
+    points_no_distro[i] = makePointbad(H, W)
+    points_distro[i] = makePoint(H, W, rotate_point)
 
-print(points[0].var())
-plt.scatter(points[:, 0], points[:, 1])
+plt.scatter(points_no_distro[:, 0], points_no_distro[:, 1], color="blue")
+plt.scatter(points_distro[:, 0], points_distro[:, 1], color="green")
 # plt.axline((H,0),(0,W))
 plt.axline((0,H),slope=(-H/W))
 plt.grid(True)

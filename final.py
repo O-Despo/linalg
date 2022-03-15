@@ -12,32 +12,25 @@ xy_W = 1
 xy_H = math.sqrt(xy_W**2 - (xy_W/2)**2)
 yz_Q = math.sqrt(xy_H**2 - (xy_H/3)**2)
 
-def make_point():
+def re
+def test_point():
     xy_slope = -xy_H/(xy_W/2)
     yz_slope = yz_Q/(xy_H*(1/3))
     yz_inter = 0
 
-    p = [(random.random()- xy_W/2), random.random() * xy_H, random.random() * yz_Q]
+    yz = [(random.random()* xy_H), (random.random() * yz_Q)]
     
-    xyr = [xy_W/4, xy_H/2]
     yx_rotate = [xy_H*(2/3), yz_Q/2]
 
-    if p[0] < 0: 
-        xyr[0] = -xyr[0]
-        xy_slope = -xy_slope
-
-    if p[1] > p[0]*xy_slope+xy_H:
-        p = [xyr[0] - (p[0] - xyr[0]), xyr[1] - (p[1] - xyr[1]), p[2]]
-
-    if p[1] < xy_H*(1/3)+yz_inter:
+    if yz[1] < xy_H*(1/3)+yz_inter:
         yx_rotate[0] = [xy_H*(1/6)]
         yz_slope = yz_Q/(xy_H*(2/3))
         yz_inter = 2*yz_Q
 
-    if p[2] > p[1]*yz_slope+yz_inter:
-        p = [p[0], yx_rotate[0] - abs(p[1] - yx_rotate[0]), yx_rotate[1] - abs(p[2] - yx_rotate[1])]
+    if yz[1] > yz[0]*yz_slope+yz_inter:
+        yz = [yx_rotate[0] - (yz[0] - yx_rotate[0]), yx_rotate[1] - (yz[1] - yx_rotate[1]), yz[2]]
 
-    return p, yx_rotate
+    return yz
 
 NUMBER_OF_POINTS = 100
 p = np.zeros((NUMBER_OF_POINTS,3))
