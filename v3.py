@@ -23,23 +23,29 @@ def calulate_midpoints(points):
     right_midpoint = [points[2][0]/2, points[1][1]/2]
     return left_midpoint, right_midpoint
 
-def run_point(triangle_points, fncs, mids):
+def run_point(triangle_points, fncs, mids, debug=False):
     """fncs and mids are diliverd (left, right)"""
     point = np.zeros((2,))
-    point[0] = (random.random()*(triangle_points[2][0]-triangle_points[0][0]))-triangle_points[2][0]
+    point[0] = (random.random()*(triangle_points[2][0]-triangle_points[0][0]))+triangle_points[0][0]
     point[1] = random.random() * triangle_points[1][1]
 
-    if point[0] < point[1][0]:
+    if point[0] < triangle_points[1][0]:
         fnc = fncs[0]
         mid = mids[0] 
     else: 
         fnc = fncs[1]
         mid = mids[1] 
-        
-    if point[1] > fnc(point[0]):
-        point = flip_over_midpoint(mid, point)
 
-    return point, fnc(point[0])
+    # Clean for DEBUG 
+    if point[1] > fnc(point[0]):
+        point_out = flip_over_midpoint(mid, point)
+    else:
+        point_out = point
+
+    if debug:
+        return point_out, point, fnc(point[0])
+    else:
+        return point, fnc(point[0])
 
 def run_points(x_tri_points, y_tri_points, num_of_points):
     points = np.zeros((num_of_points, 2))
@@ -101,8 +107,7 @@ plt.plot([1,0],[rfnc(1),rfnc(0)], color="blue")
 
 plt.axis([points_x[0][0],points_x[2][0],0,1])
 
-p = [0.2, 0.6]
-z = flip_over_midpoint(rmid ,p)
+p, z, q = run_point(points_y, (lfnc, rfnc), (lmid, rmid), True)
 plt.scatter([p[0]], [p[1]], color='red')
 plt.scatter([z[0]], [z[1]], color='blue')
 
