@@ -93,7 +93,7 @@ def run_tri_points(num_of_points, tri_points):
     fncs = (lambda x: x*l_line[0]+l_line[1], lambda x: x*r_line[0]+r_line[1])
     mids = calulate_midpoints(tri_points)
 
-    z_fnc = lambda x: x*(tri_points[1][1]/((tri_points[2][0]-tri_points[0][0])/3)) + tri_points[1][1]
+    z_fnc = lambda x: x*(tri_points[1][1]/((tri_points[2][0]-tri_points[0][0])/3)) 
 
     for i in range(num_of_points):
         p, q = run_point(tri_points, fncs, mids)
@@ -101,7 +101,7 @@ def run_tri_points(num_of_points, tri_points):
         p = [p[0], q*a[1]]
 
         dist_to_x = p[1]
-        z = random.random()*z_fnc(dist_to_x)
+        z = round(random.random()*z_fnc(dist_to_x), 8)
 
         choice = random.random()
         if choice < 1/3:
@@ -109,8 +109,7 @@ def run_tri_points(num_of_points, tri_points):
         elif choice < 2/3:
             p = flip_over_line(r_line[0], r_line[1], p)
 
-        print([p[0], p[1], z])
-        out_points[i] = [p[0], p[1], z]
+        out_points[i] = [round(p[0], 8), round(p[1], 8), z]
 
     return out_points
         
@@ -120,7 +119,7 @@ points_x_sub = np.array([[-0.5,0],[0,q*(1/3)],[0.5,0]])
 
 points_y = np.array([[-q*(2/3),0],[0,q],[q*(1/3),0]])
 
-num_of_points = 10000
+num_of_points = 25000
 
 #Test lines from triangle
 line_fncs = calc_fncs(points_x)
@@ -141,7 +140,6 @@ lmid, rmid = calulate_midpoints(points_in_use)
 # plt.plot([-1,0],[lfnc(-1),lfnc(0)], color="red")
 # plt.plot([1,0],[rfnc(1),rfnc(0)], color="blue")
 
-plt.axis([points_in_use[0][0],points_in_use[2][0],0,1])
 
 # Testing 0 1 distrobution
 # plt.axline((0,0),(1,1))
@@ -175,8 +173,8 @@ v = np.array([(-0.5, 0, 0), (0.5, 0, 0), (0, points_in_use[2][0]-points_in_use[0
 verts = [ [v[0],v[1],v[2]], [v[0],v[1],v[3]],
  [v[0],v[2],v[3]], [v[1],v[2],v[3]]]
 
-ax.scatter(graph_points[:, 0], graph_points[:, 1], graph_points[:, 2], color="red", alpha=0.2)
-ax.add_collection3d(Poly3DCollection(verts, facecolors='cyan', linewidths=1, edgecolors='r', alpha=.25))
+ax.scatter(graph_points[:, 0], graph_points[:, 1], graph_points[:, 2], color="blue", alpha=0.2)
+ax.add_collection3d(Poly3DCollection(verts, facecolors='r', linewidths=1, edgecolors='r', alpha=.0))
 
 
 # #Debug run all
