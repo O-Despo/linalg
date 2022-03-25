@@ -12,7 +12,6 @@ xy_W = 1
 xy_H = math.sqrt(xy_W**2 - (xy_W/2)**2)
 yz_Q = math.sqrt(xy_H**2 - (xy_H/3)**2)
 
-def re
 def test_point():
     xy_slope = -xy_H/(xy_W/2)
     yz_slope = yz_Q/(xy_H*(1/3))
