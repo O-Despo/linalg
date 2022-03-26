@@ -26,10 +26,6 @@ def calulate_midpoints(points):
     right_midpoint = [points[2][0]/2, points[1][1]/2]
     return left_midpoint, right_midpoint
 
-def caclulate_midpoint_of_2p(points):
-    midpoint = [points[0]/2, points[1]/2]
-    return midpoint
-
 def run_line_point():
     p = [random.random(),random.random()]
 
@@ -57,29 +53,6 @@ def run_point(triangle_points, fncs, mids):
         point_out = point
 
     return point_out, fnc(point_out[0])
-
-def run_points(x_tri_points, y_tri_points, num_of_points):
-    points = np.zeros((num_of_points, 2))
-    y_tri_points_tmp = y_tri_points.copy()
-
-    x_fncs = calc_fncs(x_tri_points)
-    x_mids = calulate_midpoints(x_tri_points)
-    
-    for i in range(num_of_points):
-        x_point, scaler = run_point(x_tri_points, x_fncs, x_mids)
-
-        y_tri_points_tmp = y_tri_points * scaler
-        
-        y_fncs = calc_fncs(y_tri_points_tmp)
-        y_mids = calulate_midpoints(y_tri_points_tmp)
-
-        y_point, scalr = run_point(y_tri_points_tmp, y_fncs, y_mids)
-
-        points[i][0] = x_point[0]
-        points[i][1] = -(y_point[0] - y_tri_points_tmp[2][0])
-        # points[i][1] = random.triangular(0,q,q*(1/3)) * scaler
-    
-    return points
 
 def flip_over_line(slope, y_intercept, p1):
     d = (p1[0] + (p1[1] - y_intercept)*slope)/(1+slope**2)

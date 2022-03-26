@@ -51,10 +51,9 @@ ax = plt.axes(projection='3d')
 ax.set_xlim(-0.5, 0.5)
 ax.set_ylim(0,1)
 ax.set_zlim3d(0,1)
-# ax.set_box_aspect([1, 1, 5])
 
 ax.add_collection3d(Poly3DCollection(verts, facecolors='r', linewidths=1, edgecolors='r', alpha=.1))
 
 ax.scatter(tetra_vertex[:, 0], tetra_vertex[:, 1], tetra_vertex[:, 2])
-ax.scatter(out_points[:, 0], out_points[:, 1], out_points[:, 2])
+ax.scatter(out_points[:, 0], out_points[:, 1], out_points[:, 2], color='blue', alpha=0.2)
 plt.show()
