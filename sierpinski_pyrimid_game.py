@@ -2,6 +2,7 @@ from mpl_toolkits.mplot3d.art3d import Poly3DCollection, Line3DCollection
 import matplotlib.pyplot as plt
 import numpy as np
 import random
+import randomPointInTetrahedron
 import math
 
 def mid_of(point, vertex):
@@ -28,7 +29,8 @@ tetra_vertex = np.array([
 num_of_points = 10000
 out_points = np.zeros((num_of_points, 3))
 
-current_point = np.array([0, .4, .5], dtype='float')
+randomPointGen = randomPointInTetrahedron.randomPointInTetrahedron(1)
+current_point = randomPointGen.run_points(1)[0]
 print(current_point, mid_of(current_point, tetra_vertex[0]))
 
 for i in range(num_of_points):
